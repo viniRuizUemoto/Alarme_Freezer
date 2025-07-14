@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freezer Biomol</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='dash.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rubik&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lexend+Deca:wght@700&family=Rubik&display=swap" rel="stylesheet">
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js" integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        const socket = io("ws://192.168.255.207:8800");
+        
+        socket.on("connect", (socket) => {
+            console.log("connected!");
+        });
+
+        setInterval(function () {
+            socket.emit("update");
+
+        },10000)
+
+        socket.on("recebi", (data) => {
+
+            
+            // let cardtext = document.getElementById("titulo_comTemp_"+element['freezer']);
+            // cardtext.innerHTML = element['freezer'] + ' ' + element
+
+            console.log("yeah!");
+            console.log(data);
+            let DateText = document.getElementById("LastAtualizacao");
+            let freezers = data['freezers'];
+            DateText.innerHTML = data['data'];
+            freezers.forEach(element => {
+                let card = document.getElementById(element["ID"]);
+                let childs = card.children;
+                childs[0].innerHTML = element["Modelo"] + ' ' + element["Temperatura"] +'°C';
+                if (element["Status"] == 1) {
+                    childs[2].src = "/static/icons/freezerOK.svg";
+                    childs[4].innerHTML = 'OK'
+                } else if (element["Status"] == 0) {
+                    childs[2].src = "/static/icons/freezerCom.svg";
+                    childs[4].innerHTML = 'Sem Comunicação'
+                } else {
+                    childs[2].src = "/static/icons/freezerAlert.svg";
+                    childs[4].innerHTML = 'Alarme'
+                }
+                $("#table_events").find("tr:not(:first)").remove();
+                let table = document.getElementById("table_events");
+                let warnings = data['warnings'];
+                warnings.forEach(element => {
+                    let row = table.insertRow();
+                    let cell1 = row.insertCell(0);
+                    cell1.innerHTML = element['freezer'];
+                    let cell2 = row.insertCell(1);
+                    let divchild = document.createElement("div");
+                    let img = document.createElement("img");
+                    divchild.className = "info";
+                    if (element['tipo'] == 'Fora da Temperatura') {
+                        img.src = "/static/icons/AlertIcon.svg"
+                    } else if (element['tipo'] == 'Falha de comunicação') {
+                        img.src = "/static/icons/ComErrorIcon.svg"
+                    } else if (element['tipo'] == 'Retornou a Temperatura desejada') {
+                        img.src = "/static/icons/OKIcon.svg"
+                    } else {
+                        img.src = "/static/icons/ComStablishedIcon.svg"
+                    }
+                    let text = document.createElement("p");
+                    text.innerHTML = element['tipo'];
+                    divchild.appendChild(img);
+                    divchild.appendChild(text);
+                    cell2.appendChild(divchild);
+                    let cell3 = row.insertCell(2);
+                    cell3.innerHTML = element['data'];
+                });
+                
+            });
+        })
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="topnav">
+            <a class="active" href="#home">Home</a>
+            <a href="{{url_for('cadastro')}}">Registrar</a>
+            <a href="{{url_for('report')}}">Relatório</a>
+            <a href="{{url_for('logout')}}">Logout</a>
+        </div> 
+        <div class="container-head">
+            <img src="/static/icons/monitormaento.svg" id = 'monitor-icon'>
+            <div class="text-head">
+                <h1 class="super-title">Monitoramento de Freezers</h1>
+                <h1 class="super-title">Biomol</h1>
+            </div>
+            
+        </div>
+        <div class="atualiza">
+            <p>Ultima atualização: </p>
+            <p id = 'LastAtualizacao'>{{atualizado}}</p>
+        </div>
+        
+        <div class="dash-area">
+            <div class="monitor">
+                {% for i in lista_freezers %}
+                <a href="{{url_for('info',id=i.id)}}">
+                    <div class="card" id = "{{i.id}}">
+                        {% if temp[i.modelo] %}
+                        <h2 class="title" id = 'titulo_comTemp_{{i.id}}'> {{i.modelo}} - {{temp[i.modelo]}}</h2>
+                        {% else %}
+                        <h2 class="title"> {{i.modelo}}</h2>
+                        {% endif %}
+                        
+                        <br>
+                        {% if i.status == 1 %}
+                        <img id="OK" src="/static/icons/freezerOK.svg">
+                        <br>
+                        <h3 class="status" id ="OK">OK</h3>
+                        {% elif i.status == 0 %}
+                        <img  src="/static/icons/freezerCom.svg">
+                        <br>
+                        <h3 class="status">Sem Comunicação</h3>
+                        {% else %}
+                        <img src="/static/icons/freezerAlert.svg">
+                        <br>
+                        <h3 class="status">Alarme</h3>
+                        {% endif %}
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+            <div class="bottom-row">
+                <div class="card wanrnings">
+                    <h1 class="super-title card-title">Avisos</h1>
+                    <div class="tabela">
+                        <table id="table_events">
+                            <tr>
+                                <th>Freezer</th>
+                                <th>Alerta</th>
+                                <th>Data Hora</th>
+                            </tr>
+                            {% for i in warings %}
+                            <tr>
+                                    <td>{{lista_freezers[i.freezer_id-1].modelo}}</td>
+                                    {% if i.tipo == 'Fora da Temperatura' %}
+                                    <td><div class="info"><img src="/static/icons/AlertIcon.svg" >{{i.tipo}}</div></td>
+                                    {% elif i.tipo == 'Falha de comunicação' %}
+                                    <td><div class="info"><img src="/static/icons/ComErrorIcon.svg" >{{i.tipo}}</div></td>
+                                    {% elif i.tipo == 'Retornou a Temperatura desejada' %}
+                                    <td><div class="info"><img src="/static/icons/OKIcon.svg" >{{i.tipo}}</div></td>
+                                    {% else %}
+                                    <td><div class="info"><img src="/static/icons/ComStablishedIcon.svg" >{{i.tipo}}</div></td>
+                                    {% endif %}
+                                    <td>{{i.data_hora}}</td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </div>
+        
+
+        
+    </div>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freezer Biomol</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='cadastro.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rubik&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lexend+Deca:wght@700&family=Rubik&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@600&family=Noto+Sans:wght@500&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@600&family=Noto+Sans:wght@500&family=Nunito:wght@500&display=swap" rel="stylesheet"> 
+</head>
+<body>
+    <div class="container">
+        <div class="topnav">
+            <a href="{{url_for('home')}}">Home</a>
+            <a class="active" href="{{url_for('cadastro')}}">Registrar</a>
+            <a href="{{url_for('report')}}">Relatório</a>
+            <a href="{{url_for('logout')}}">Logout</a>
+        </div> 
+        <div class="center-card">
+            <div class="form-left-right">
+                <div class="left-form">
+                    <h1 class="super-title">Informações</h1>
+                    <ul>
+                        <li>
+                            <div class="info-item">
+                                <h3>Modelo</h3>
+                                <p>Nome do Modelo do Freezer</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="info-item">
+                                <h3>Marca</h3>
+                                <p>Marca do Freezer</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="info-item">
+                                <h3>Temperatura</h3>
+                                <p> Temperatura limite para acionamento do alarme</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="atualiza">
+                    
+                    <form action="{{url_for('cadastro')}}"  method="post">
+                        <div class="form">
+                            <h1 class="super-title">Registrar</h1>
+                            <div class="for-container">
+                                <div class="form-item">
+                                    <label for="Modelo">Modelo</label>
+                                    <input type="text" name="Modelo" id="Modelo">
+                                </div>
+                                <div class="form-item">
+                                    <label for="Marca">Marca</label>
+                                    <input type="text" name="Marca" id="Marca">
+                                </div>
+                                <div class="form-item">
+                                    <label for="Temperatura">Temperatura</label>
+                                    <input type="text" name="Temperatura" id="Temperatura">
+                                </div>
+                            </div>
+                            
+                            <button type="submit">Cadastrar</button>
+                        </div>
+                    </form>
+                    
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
+</body>
+</html>

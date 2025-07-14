@@ -1,0 +1,336 @@
+body {
+    --card-background-color: transparent;
+    --card-border-color: rgba(24, 24, 27, 0.08);
+    --card-box-shadow-1: rgba(24, 24, 27, 0.02);
+    --card-box-shadow-1-y: 3px;
+    --card-box-shadow-1-blur: 6px;
+    --card-box-shadow-2: rgba(24, 24, 27, 0.04);
+    --card-box-shadow-2-y: 2px;
+    --card-box-shadow-2-blur: 7px;
+    --card-line-color: #2A2B2C;
+    --card-tile-color: rgba(16, 185, 129, 0.05);
+    margin: 0px;
+}
+
+.monitor {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+a {
+    color: #2A2B2C;
+    text-decoration: none;
+}
+
+.card {
+    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Rubik', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--background-color);
+    box-shadow: 0px var(--card-box-shadow-1-y) var(--card-box-shadow-1-blur) var(--card-box-shadow-1), 0px var(--card-box-shadow-2-y) var(--card-box-shadow-2-blur) var(--card-box-shadow-2), 0 0 0 1px var(--card-border-color);
+    padding: 16px 16px 16px 16px;
+    border-radius: 15px;
+    width: 205px;
+    margin: 0px 20px 0px 20px;
+}
+
+.wanrnings {
+    width: 800px;
+}
+
+td {
+    text-align: center;
+}
+
+.bottom-row {
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.title  {
+    margin: 0px 0px 10px 0px;
+}
+
+.status  {
+    margin: 10px 0px 0px 0px;
+}
+
+.dash-area {
+    display: flex;
+    flex-direction: column;
+    padding: 30px 70px 0px 70px;
+}
+
+/* Add a black background color to the top navigation */
+.topnav {
+    background-color: #5db1ff;
+    overflow: hidden;
+    margin-bottom: 20px;
+    padding-left: 70px;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Lexend Deca', sans-serif;
+    font-family: 'Rubik', sans-serif;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+    background-color:rgb(0, 15, 97) ;
+    color: #ddd;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+    background-color: rgb(0, 15, 97);
+    color: white;
+}
+
+.super-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Lexend Deca', sans-serif;
+    font-family: 'Rubik', sans-serif;
+    margin: 0;
+}
+
+.container-head {
+    display:flex;
+    margin-left: 70px;
+}
+
+.text-head {
+    margin-left: 20px;
+}
+
+img {
+    height: 100px;
+}
+
+p {
+    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Lexend Deca', sans-serif;
+    font-family: 'Rubik', sans-serif;
+    margin: 0px;
+}
+
+.tabela {
+    height: 200px;
+    overflow-y: scroll;
+    width: 90%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+#monitor-icon {
+    width: 70px;
+}
+
+th {
+    border-bottom: 2px solid #59595a9c;
+    border-top: 2px solid #59595a9c;
+    border-left: 0px;
+    border-right: 0px;
+    background-color: #b9b9bd9c;
+    padding: 5px;
+}
+
+td {
+    padding: 5px;
+}
+
+.atualiza {
+    width: 100%;
+    padding-left: 70px;
+    padding-top: 20px;
+    margin-left: 20px;
+}
+
+td img {
+    height: 20px;
+    margin-right: 5px;
+}
+
+.info {
+    display: flex;
+    justify-content: center;
+}
+
+@media  only screen and (max-width: 768px) {
+    .atualiza {
+        width: 100%;
+        padding-left: 15px;
+        padding-top: 5px;
+    }
+
+    .card {
+        font-family: 'Bebas Neue', sans-serif;
+        font-family: 'Rubik', sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: var(--background-color);
+        box-shadow: 0px var(--card-box-shadow-1-y) var(--card-box-shadow-1-blur) var(--card-box-shadow-1), 0px var(--card-box-shadow-2-y) var(--card-box-shadow-2-blur) var(--card-box-shadow-2), 0 0 0 1px var(--card-border-color);
+        padding: 5px 5px 5px 5px;
+        border-radius: 15px;
+        width: 100px;
+        margin: 0px 5px 0px 5px;
+        padding: 10px;
+        height: 140px;
+    }
+    
+    div.card img {
+        height: 45px;
+        margin: 5px 0 5px 0;
+    }
+
+    img {
+        height: 50px;
+    }
+    
+    #OK {
+        margin-top: 20px;
+    }
+
+    div.card h2 {
+        font-size: medium;
+    }
+
+    .wanrnings {
+        width: 96%;
+        height: 400px;
+    }
+    
+    td {
+        text-align: center;
+    }
+    
+    .bottom-row {
+        width: 100%;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .title  {
+        margin: 0px 0px 2px 0px;
+    }
+    
+    .status  {
+        margin: 3px 0px 0px 0px;
+        font-size: small;
+    }
+    
+    .dash-area {
+        display: flex;
+        flex-direction: column;
+        padding: 8px 10px 0px 10px;
+    }
+    
+    /* Add a black background color to the top navigation */
+    .topnav {
+        background-color: #5db1ff;
+        overflow: hidden;
+        margin-bottom: 20px;
+        padding-left: 15px;
+    }
+    
+    /* Style the links inside the navigation bar */
+    .topnav a {
+        float: left;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+        font-family: 'Bebas Neue', sans-serif;
+        font-family: 'Lexend Deca', sans-serif;
+        font-family: 'Rubik', sans-serif;
+    }
+    
+    /* Change the color of links on hover */
+    .topnav a:hover {
+        background-color:rgb(0, 15, 97) ;
+        color: #ddd;
+    }
+    
+    /* Add a color to the active/current link */
+    .topnav a.active {
+        background-color: rgb(0, 15, 97);
+        color: white;
+    }
+    
+    .super-title {
+        font-family: 'Bebas Neue', sans-serif;
+        font-family: 'Lexend Deca', sans-serif;
+        font-family: 'Rubik', sans-serif;
+        margin: 0;
+        font-size: large;
+    }
+
+    #monitor-icon {
+        width: 50px;
+    }
+    
+    .container-head {
+        display:flex;
+        margin-left: 15px;
+    }
+    
+    .text-head {
+        margin-left: 7px;
+        font-size: medium;
+    }
+    
+    p {
+        font-family: 'Bebas Neue', sans-serif;
+        font-family: 'Lexend Deca', sans-serif;
+        font-family: 'Rubik', sans-serif;
+        margin: 0px;
+    }
+    
+    .tabela {
+        height: 370px;
+        overflow-y: scroll;
+        width: 90%;
+    }
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+    
+    th {
+        border-bottom: 2px solid #59595a9c;
+        border-top: 2px solid #59595a9c;
+        border-left: 0px;
+        border-right: 0px;
+        background-color: #b9b9bd9c;
+        padding: 5px;
+    }
+    
+    td {
+        font-size: small;
+        padding: 5px;
+    }
+
+    div.info img {
+        height: 20px;
+        margin-right: 5px;
+    }
+}

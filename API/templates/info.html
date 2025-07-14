@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freezer Biomol - </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='info.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rubik&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lexend+Deca:wght@700&family=Rubik&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@600&family=Noto+Sans:wght@500&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@600&family=Noto+Sans:wght@500&family=Nunito:wght@500&display=swap" rel="stylesheet"> 
+</head>
+<body>
+    <div class="container-big">
+        <div class="topnav">
+            <a href="{{url_for('home')}}">Home</a>
+            <a class="active" href="{{url_for('cadastro')}}">Registrar</a>
+            <a href="{{url_for('logout')}}">Logout</a>
+        </div> 
+        
+        <div class="container">
+            <h2>Alertas do Freezer</h2>
+            <ul class="responsive-table">
+              <li class="table-header">
+                <div class="col col-1">Ícone</div>
+                <div class="col col-2">Alerta</div>
+                <div class="col col-3">Data hora</div>
+              </li>
+              {% for i in registros %}
+              <li class="table-row">
+                {% if i.tipo == 'Fora da Temperatura' %}
+                <div class="col col-1" data-label=""><img src="/static/icons/AlertIcon.svg" height="50"></div>
+                <div class="col col-2" data-label="Alerta">{{i.tipo}}</div>
+                {% elif i.tipo == 'Falha de comunicação' %}
+                <div class="col col-1" data-label=""><img src="/static/icons/ComErrorIcon.svg" height="50"></div>
+                <div class="col col-2" data-label="Alerta">{{i.tipo}}</div>
+                {% elif i.tipo == 'Retornou a Temperatura desejada' %}
+                <div class="col col-1" data-label=""><img src="/static/icons/OKIcon.svg" height="50"></div>
+                <div class="col col-2" data-label="Alerta">{{i.tipo}}</div>
+                {% else %}
+                <div class="col col-1" data-label=""><img src="/static/icons/ComStablishedIcon.svg" height="50"></div>
+                <div class="col col-2" data-label="Alerta">{{i.tipo}}</div>
+                {% endif %}
+                <div class="col col-3" data-label="Data Hora">{{i.data_hora}}</div>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+    </div>
+</body>
+</html>
